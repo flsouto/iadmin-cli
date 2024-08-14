@@ -9,6 +9,8 @@ const hours = [
 
 const date = new Date().toISOString().split("T")[0]
 
+console.log('Adding to date: ',date)
+
 timesheet_add(date,hours[0],hours[1])
 timesheet_add(date,hours[2],hours[3])
 
