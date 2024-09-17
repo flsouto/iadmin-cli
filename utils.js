@@ -25,9 +25,9 @@ export async function login(){
 	return await response.json()
 }
 
-export async function timesheet_add(date, entrance, exit){
+export async function timesheet_add(date, entrance, exit, project_id=null){
 	let {token} = await login()
-	const project_id = getRandomItem(process.env.project_id.split(','))
+	const project_id = project_id || getRandomItem(process.env.project_id.split(','))
 	console.log('Picked project:', project_id)
 	const options = {
 	    "headers": {

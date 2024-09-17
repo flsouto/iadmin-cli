@@ -1,16 +1,19 @@
-import {timesheet_add} from './utils.js'
+const projects = {
+	sun: 101,
+	legom: 104,
+	urca: 74,
+	abra: 19,
+	wetalk: 85
+}
 
-const hours = [
-	process.argv[2]||9,
-	process.argv[3]||12,
-	process.argv[4]||13,
-	process.argv[5]||18,
-].map(h => String(h).padStart(2,"0") + ":00")
+let hour = 9;
 
-const date = new Date().toISOString().split("T")[0]
-
-console.log('Adding to date: ',date)
-
-timesheet_add(date,hours[0],hours[1])
-timesheet_add(date,hours[2],hours[3])
-
+for(const arg of process.argv.slice(2)){
+	const [project, duration] = arg.split(':')
+	const id = projects[project]
+    const start = String(hour).padStart(2,"0")+':00';
+    const end = String(hour+(+duration)).padStart(2,"0")+':00';
+    hour+=+duration
+    if(hour === 12) hour++
+	console.log(`${project} (${id}): ${start} - ${end}`)
+}
